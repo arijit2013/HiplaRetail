@@ -91,8 +91,14 @@
 }
 - (IBAction)loginBtn:(id)sender {
     
-    [self LoginWithDetails];
+   // [self LoginWithDetails];
  
+    ProductCategoryViewController *productCategoryViewControllerScreen = [[ProductCategoryViewController alloc]initWithNibName:@"ProductCategoryViewController" bundle:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+       [self.navigationController pushViewController:productCategoryViewControllerScreen animated:YES];
+    });
     
 }
 
@@ -247,7 +253,7 @@
                     }
                     
 //                    ProductCategoryViewController *productCategoryViewControllerScreen = [[ProductCategoryViewController alloc]initWithNibName:@"ProductCategoryViewController" bundle:nil];
-                    
+//
 //                    dispatch_async(dispatch_get_main_queue(), ^{
 //
 //                       [self.navigationController pushViewController:productCategoryViewControllerScreen animated:YES];

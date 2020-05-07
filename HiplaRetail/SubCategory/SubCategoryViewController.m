@@ -339,11 +339,11 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
             
             if ([successStr isEqualToString:@"success"]) {
                 
-                productbyCatlistInfo = [dict objectForKey:@"productlist"];
+                self->productbyCatlistInfo = [dict objectForKey:@"productlist"];
                 
-                if ([productbyCatlistInfo count]>0) {
+                if ([self->productbyCatlistInfo count]>0) {
                     
-                    productbyCatlistfoDict = (NSDictionary *)[productbyCatlistInfo objectAtIndex:0];
+                    self->productbyCatlistfoDict = (NSDictionary *)[self->productbyCatlistInfo objectAtIndex:0];
                     
                     
                     //                    NSDictionary *dict = [ProfDict dictionaryByReplacingNullsWithBlanks];
@@ -353,7 +353,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         ProductbycatViewController *productbycatScreen = [[ProductbycatViewController alloc]initWithNibName:@"ProductbycatViewController" bundle:nil];
-                        productbycatScreen.productbyCatlistInfo = productbyCatlistInfo;
+                        productbycatScreen.productbyCatlistInfo = self->productbyCatlistInfo;
                         [self.navigationController pushViewController:productbycatScreen animated:YES];
                         
                         
@@ -461,15 +461,14 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
 
 ///////////////////////////////////////////NAvigine///////////////////////////////////////////////////////////////////
 
-- (void)navigationTicker
-{
-    NCDeviceInfo *res = [ZoneDetection sharedZoneDetection].navigineCore.deviceInfo;
+# pragma mark NavigineCoreDelegate methods
+
+- (void) navigineCore: (NavigineCore *)navigineCore didUpdateDeviceInfo: (NCDeviceInfo *)deviceInfo {
+
+    NSError *navError = deviceInfo.error;
     
-    NSLog(@"Error code:%zd",res.error.code);
-    
-    if (res.error.code == 0) {
-        
-        NSDictionary* dic = [self didEnterZoneWithPoint:CGPointMake(res.kx, res.ky)];
+    if (navError == nil) {
+        NSDictionary* dic = [self didEnterZoneWithPoint:CGPointMake(deviceInfo.coordinates.latitude, deviceInfo.coordinates.longitude)];
         
         if ([[dic allKeys] containsObject:@"name"]) {
             
@@ -500,12 +499,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
            // [self performSelector:@selector(navigateForProduct) withObject:nil afterDelay:0.3];
             
         });
-        
     }
-    else {
-        
-    }
-    
 }
 
 - (NSDictionary *)didEnterZoneWithPoint:(CGPoint)currentPoint {
@@ -528,10 +522,10 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
                     
                     NSDictionary* dicCoordinate = [NSDictionary dictionaryWithDictionary:[coordinates objectAtIndex:j]];
                     
-                    if ([[dicCoordinate allKeys] containsObject:@"kx"]) {
+                    if ([[dicCoordinate allKeys] containsObject:@"latitude"]) {
                         
-                        float xPoint = [[dicCoordinate objectForKey:@"kx"] floatValue];
-                        float yPoint = [[dicCoordinate objectForKey:@"ky"] floatValue];
+                        float xPoint = [[dicCoordinate objectForKey:@"latitude"] floatValue];
+                        float yPoint = [[dicCoordinate objectForKey:@"longitude"] floatValue];
                         
                         CGPoint point = CGPointMake(xPoint, yPoint);
                         

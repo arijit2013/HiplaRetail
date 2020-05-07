@@ -270,10 +270,6 @@
 		E1F56C27202AF9930062DE8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1F56C29202AF9930062DE8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1F56C2A202AF9930062DE8D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E1F56C34202AF9930062DE8D /* HiplaRetailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HiplaRetailTests.m; sourceTree = "<group>"; };
-		E1F56C36202AF9930062DE8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1F56C3F202AF9930062DE8D /* HiplaRetailUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HiplaRetailUITests.m; sourceTree = "<group>"; };
-		E1F56C41202AF9930062DE8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1F56C4D202B02430062DE8D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		E1F56C4E202B02430062DE8D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E1F56C4F202B02430062DE8D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -379,7 +375,6 @@
 				E7766F3AA6490EC3C29C3A7C /* Pods-HiplaRetail.debug.xcconfig */,
 				50C80EA3D70FFEA56B29AF92 /* Pods-HiplaRetail.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -666,8 +661,6 @@
 			children = (
 				E17ED4B9202EDB0600DDA46F /* Common */,
 				E1F56C17202AF9930062DE8D /* HiplaRetail */,
-				E1F56C33202AF9930062DE8D /* HiplaRetailTests */,
-				E1F56C3E202AF9930062DE8D /* HiplaRetailUITests */,
 				E1F56C16202AF9930062DE8D /* Products */,
 				AFC999C7951E85BDEA821C8C /* Frameworks */,
 				3A24B571CA70329A4019AB4F /* Pods */,
@@ -716,24 +709,6 @@
 				E1F56C21202AF9930062DE8D /* HiplaRetail.xcdatamodeld */,
 			);
 			path = HiplaRetail;
-			sourceTree = "<group>";
-		};
-		E1F56C33202AF9930062DE8D /* HiplaRetailTests */ = {
-			isa = PBXGroup;
-			children = (
-				E1F56C34202AF9930062DE8D /* HiplaRetailTests.m */,
-				E1F56C36202AF9930062DE8D /* Info.plist */,
-			);
-			path = HiplaRetailTests;
-			sourceTree = "<group>";
-		};
-		E1F56C3E202AF9930062DE8D /* HiplaRetailUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E1F56C3F202AF9930062DE8D /* HiplaRetailUITests.m */,
-				E1F56C41202AF9930062DE8D /* Info.plist */,
-			);
-			path = HiplaRetailUITests;
 			sourceTree = "<group>";
 		};
 		E1F56C52202B02A90062DE8D /* ExternalClass */ = {
@@ -879,7 +854,7 @@
 		E1F56C0D202AF9930062DE8D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = fnspl3;
 				TargetAttributes = {
 					E1F56C14202AF9930062DE8D = {
@@ -1140,6 +1115,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1147,6 +1123,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1195,6 +1172,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1202,6 +1180,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

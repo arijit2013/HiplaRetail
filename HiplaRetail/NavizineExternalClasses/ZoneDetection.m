@@ -57,7 +57,7 @@ static ZoneDetection *sharedZone = nil;
                                               
                                               NSLog(@"The response is - %@",responseDictionary);
                                               
-                                              _zoneArray = [NSArray arrayWithArray:[responseDictionary objectForKey:@"zoneSegments"]];
+                                              self->_zoneArray = [NSArray arrayWithArray:[responseDictionary objectForKey:@"zoneSegments"]];
                                               
                                               // [sharedZone navigineSetup];
                                           }
@@ -89,7 +89,7 @@ static ZoneDetection *sharedZone = nil;
     dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         
         // Your code here
-        if (_delegate) {
+        if (self->_delegate) {
             
             [sharedZone navigationTick:nil];
             
@@ -187,8 +187,8 @@ static ZoneDetection *sharedZone = nil;
                                  NSLog(@"%zd",loadProcess);
                              } successBlock:^(NSDictionary *userInfo) {
                                  
-                                 [_navigineCore startNavigine];
-                                 [_navigineCore startPushManager];
+                                 [self->_navigineCore startNavigine];
+                                 [self->_navigineCore startPushManager];
                                                                   
                              } failBlock:^(NSError *error) {
                                  NSLog(@"%@",error);

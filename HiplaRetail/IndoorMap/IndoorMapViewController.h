@@ -10,6 +10,7 @@
 #import "APIManager.h"
 #import "ZoneDetection.h"
 #import "ViewController.h"
+#import <Navigine/Navigine.h>
 
 @interface IndoorMapViewController : ViewController<UIScrollViewDelegate, sharedZoneDetectionDelegate>{
     

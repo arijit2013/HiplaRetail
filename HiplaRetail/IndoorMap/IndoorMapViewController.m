@@ -855,7 +855,7 @@
             
             NCLocationPoint *location = [NCLocationPoint pointWithLocation:res.location sublocation:res.sublocation x:[NSNumber numberWithFloat:xPoint] y:[NSNumber numberWithFloat:yPoint]];
             
-            [[ZoneDetection sharedZoneDetection].navigineCore addTatget:location];
+            [[ZoneDetection sharedZoneDetection].navigineCore setTarget:location];
             
             CGFloat xPoint2 = [[_arrPointx objectAtIndex:0] floatValue];
             CGFloat yPoint2 = [[_arrPointy objectAtIndex:0] floatValue];
@@ -1167,7 +1167,7 @@
         
         NCLocationPoint *location = [NCLocationPoint pointWithLocation:res.location sublocation:res.sublocation x:[NSNumber numberWithFloat:xPoint] y:[NSNumber numberWithFloat:yPoint]];
         
-        [[ZoneDetection sharedZoneDetection].navigineCore addTatget:location];
+        [[ZoneDetection sharedZoneDetection].navigineCore setTarget:location];
         
         [_pressedPin.popUp removeFromSuperview];
         _pressedPin.popUp.hidden = YES;

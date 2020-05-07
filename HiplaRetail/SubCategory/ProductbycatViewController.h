@@ -13,8 +13,9 @@
 #import "MapPin.h"
 #import "APIManager.h"
 #import "ZoneDetection.h"
+#import <Navigine/Navigine.h>
 
-@interface ProductbycatViewController :ViewController<UICollectionViewDataSource,UICollectionViewDelegate,sharedZoneDetectionDelegate>{
+@interface ProductbycatViewController :ViewController<UICollectionViewDataSource,UICollectionViewDelegate,sharedZoneDetectionDelegate,NavigineCoreDelegate,NavigineCoreNavigationDelegate,NavigineCoreLocationDelegate,NavigineCoreBluetoothDelegate>{
     
     APIManager *api;
     KYDrawerController *drawer;

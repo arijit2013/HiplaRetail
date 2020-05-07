@@ -32,7 +32,6 @@
 
 @property (nonatomic, strong) MapPin *pressedPin;
 @property (nonatomic, assign) BOOL isRouting;
-@property (nonatomic, strong) NavigineCore *navigineCore;
 @property (nonatomic, strong) NSMutableArray *arrNames;
 @property (nonatomic, strong) NSMutableArray *arrPointx;
 @property (nonatomic, strong) NSMutableArray *arrPointy;
@@ -400,49 +399,58 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
     }];
     
 }
+
+
 ///////////////////////////////////////////NAvigine///////////////////////////////////////////////////////////////////
+
+- (void) navigineCore: (NavigineCore *)navigineCore didUpdateDeviceInfo: (NCDeviceInfo *)deviceInfo {
+    
+  NSError *navError = deviceInfo.error;
+  if (navError == nil) {
+      NSDictionary* dic = [self didEnterZoneWithPoint:CGPointMake(deviceInfo.coordinates.latitude, deviceInfo.coordinates.longitude)];
+          
+          if ([[dic allKeys] containsObject:@"name"]) {
+              
+              NSString* zoneName = [dic objectForKey:@"name"];
+              
+              if (!_currentZoneName) {
+                  
+                  _currentZoneName = zoneName;
+                  
+                  [self enterZoneWithZoneName:_currentZoneName];
+                  
+              } else {
+                  
+                  if (![zoneName isEqualToString:_currentZoneName]) {
+                      
+                      _currentZoneName = zoneName;
+                      [self enterZoneWithZoneName:_currentZoneName];
+                      
+                  } else {
+                      
+                  }
+              }
+              
+          }
+          
+          dispatch_async(dispatch_get_main_queue(), ^{
+              
+              // [self performSelector:@selector(navigateForProduct) withObject:nil afterDelay:0.3];
+              
+          });
+          
+    }
+    
+}
+
 - (void)navigationTicker
 {
-    NCDeviceInfo *res = [ZoneDetection sharedZoneDetection].navigineCore.deviceInfo;
+    NSError *navError = [ZoneDetection sharedZoneDetection].navigineCore.deviceInfo.error;
     
-    NSLog(@"Error code:%zd",res.error.code);
+    NSLog(@"Error code: %ld",(long)navError.code);
     
-    if (res.error.code == 0) {
+    if (navError.code == 0) {
         
-        NSDictionary* dic = [self didEnterZoneWithPoint:CGPointMake(res.kx, res.ky)];
-        
-        if ([[dic allKeys] containsObject:@"name"]) {
-            
-            NSString* zoneName = [dic objectForKey:@"name"];
-            
-            if (!_currentZoneName) {
-                
-                _currentZoneName = zoneName;
-                
-                [self enterZoneWithZoneName:_currentZoneName];
-                
-            } else {
-                
-                if (![zoneName isEqualToString:_currentZoneName]) {
-                    
-                    _currentZoneName = zoneName;
-                    [self enterZoneWithZoneName:_currentZoneName];
-                    
-                } else {
-                    
-                }
-            }
-            
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // [self performSelector:@selector(navigateForProduct) withObject:nil afterDelay:0.3];
-            
-        });
-        
-    }
-    else {
         
     }
     
@@ -450,8 +458,9 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
 
 - (NSDictionary *)didEnterZoneWithPoint:(CGPoint)currentPoint {
     
-    NSDictionary* zone = nil;
+    NSDictionary *zone = nil;
     _zoneArray = [NSArray arrayWithArray:[ZoneDetection sharedZoneDetection].zoneArray];
+    
     if (_zoneArray) {
         
         for (NSInteger i = 0; i < [_zoneArray count]; i++) {
@@ -559,15 +568,15 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
     }
 }
 
-
 -(void)exitZoneWithZoneName:(NSString *)zoneName {
     
     if (zoneName) {
         
     }
 }
--(void)getDiscount:(NSString *)zoneID
-{
+
+-(void)getDiscount:(NSString *)zoneID {
+    
     [SVProgressHUD show];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -605,7 +614,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
             
             if ([successStr isEqualToString:@"success"]) {
                 
-                BOOL offerDescription = [Userdefaults boolForKey:[NSString stringWithFormat:@"offerDescription:%@",zoneId]];
+                BOOL offerDescription = [Userdefaults boolForKey:[NSString stringWithFormat:@"offerDescription:%@",self->zoneId]];
                 
                                 if (offerDescription==NO)
                                 {
@@ -626,10 +635,10 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
                     
                 });
                 
-                                    [Userdefaults setBool:YES forKey:[NSString stringWithFormat:@"offerDescription:%@",zoneId]];
-                                    [Userdefaults synchronize];
+                [Userdefaults setBool:YES forKey:[NSString stringWithFormat:@"offerDescription:%@",self->zoneId]];
+                [Userdefaults synchronize];
                 
-                                }
+              }
                 
                 
             } else {

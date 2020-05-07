@@ -295,7 +295,7 @@
                                               
                                               NSLog(@"The response is - %@",responseDictionary);
                                               
-                                              _zoneArray = [NSArray arrayWithArray:[responseDictionary objectForKey:@"zoneSegments"]];
+                                              self->_zoneArray = [NSArray arrayWithArray:[responseDictionary objectForKey:@"zoneSegments"]];
                                               
                                               [self navigationStart];
                                           }

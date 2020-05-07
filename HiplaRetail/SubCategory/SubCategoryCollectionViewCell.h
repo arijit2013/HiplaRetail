@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class AsynccronusImageView;
+
 @interface SubCategoryCollectionViewCell:UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;

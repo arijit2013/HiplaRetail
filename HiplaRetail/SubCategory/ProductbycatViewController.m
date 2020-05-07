@@ -32,7 +32,6 @@
 
 @property (nonatomic, strong) MapPin *pressedPin;
 @property (nonatomic, assign) BOOL isRouting;
-@property (nonatomic, strong) NavigineCore *navigineCore;
 @property (nonatomic, strong) NSMutableArray *arrNames;
 @property (nonatomic, strong) NSMutableArray *arrPointx;
 @property (nonatomic, strong) NSMutableArray *arrPointy;
@@ -423,52 +422,46 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger) section {
 
 ///////////////////////////////////////////NAvigine///////////////////////////////////////////////////////////////////
 
-- (void)navigationTicker
-{
-    NCDeviceInfo *res = [ZoneDetection sharedZoneDetection].navigineCore.deviceInfo;
+- (void) navigineCore: (NavigineCore *)navigineCore didUpdateDeviceInfo: (NCDeviceInfo *)deviceInfo {
     
-    NSLog(@"Error code:%zd",res.error.code);
-    
-    if (res.error.code == 0) {
-        
-        NSDictionary* dic = [self didEnterZoneWithPoint:CGPointMake(res.kx, res.ky)];
-        
-        if ([[dic allKeys] containsObject:@"name"]) {
-            
-            NSString* zoneName = [dic objectForKey:@"name"];
-            
-            if (!_currentZoneName) {
-                
-                _currentZoneName = zoneName;
-                
-                [self enterZoneWithZoneName:_currentZoneName];
-                
-            } else {
-                
-                if (![zoneName isEqualToString:_currentZoneName]) {
-                    
-                    _currentZoneName = zoneName;
-                    [self enterZoneWithZoneName:_currentZoneName];
-                    
-                } else {
-                    
-                }
-            }
-            
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // [self performSelector:@selector(navigateForProduct) withObject:nil afterDelay:0.3];
-            
-        });
-        
-    }
-    else {
-        
+  NSError *navError = deviceInfo.error;
+  if (navError == nil) {
+      NSDictionary* dic = [self didEnterZoneWithPoint:CGPointMake(deviceInfo.coordinates.latitude, deviceInfo.coordinates.longitude)];
+          
+          if ([[dic allKeys] containsObject:@"name"]) {
+              
+              NSString* zoneName = [dic objectForKey:@"name"];
+              
+              if (!_currentZoneName) {
+                  
+                  _currentZoneName = zoneName;
+                  
+                  [self enterZoneWithZoneName:_currentZoneName];
+                  
+              } else {
+                  
+                  if (![zoneName isEqualToString:_currentZoneName]) {
+                      
+                      _currentZoneName = zoneName;
+                      [self enterZoneWithZoneName:_currentZoneName];
+                      
+                  } else {
+                      
+                  }
+              }
+              
+          }
+          
+          dispatch_async(dispatch_get_main_queue(), ^{
+              
+              // [self performSelector:@selector(navigateForProduct) withObject:nil afterDelay:0.3];
+              
+          });
+          
     }
     
 }
+
 
 - (NSDictionary *)didEnterZoneWithPoint:(CGPoint)currentPoint {
     

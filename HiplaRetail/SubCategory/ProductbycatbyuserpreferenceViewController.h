@@ -13,8 +13,10 @@
 #import "MapPin.h"
 #import "APIManager.h"
 #import "ZoneDetection.h"
-@interface ProductbycatbyuserpreferenceViewController : ViewController<UICollectionViewDataSource,UICollectionViewDelegate,sharedZoneDetectionDelegate>{
-    
+#import <Navigine/Navigine.h>
+
+@interface ProductbycatbyuserpreferenceViewController : ViewController<UICollectionViewDataSource,UICollectionViewDelegate,sharedZoneDetectionDelegate,NavigineCoreDelegate,NavigineCoreNavigationDelegate,NavigineCoreLocationDelegate,NavigineCoreBluetoothDelegate>
+{
     APIManager *api;
     KYDrawerController *drawer;
     MenuTableViewController *menu;
@@ -27,8 +29,7 @@
 
 @property (nonatomic, strong) NSString* currentZoneName;
 @property (nonatomic, strong) NSArray *zoneArray;
-
-
+@property (nonatomic, strong) NavigineCore *navigineCore;
 
 - (IBAction)menuBtn:(id)sender;
 - (IBAction)addToCart:(id)sender;

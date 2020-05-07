@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Navigine/NavigineSDK.h"
+#import <Navigine/Navigine.h>
 #import "UIView+Additions.h"
 #define kColorFromHex(color)[UIColor colorWithRed:((float)((color & 0xFF0000) >> 16))/255.0 green:((float)((color & 0xFF00) >> 8))/255.0 blue:((float)(color & 0xFF))/255.0 alpha:1.0]
 

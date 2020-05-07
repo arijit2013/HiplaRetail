@@ -17,6 +17,7 @@
 #import "ZoneDetection.h"
 
 @class IndoorMapViewController;
+
 @interface SubCategoryViewController : ViewController<UICollectionViewDataSource,UICollectionViewDelegate,sharedZoneDetectionDelegate>{
     
     APIManager *api;
